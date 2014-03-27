@@ -57,6 +57,9 @@
         self.delegate = delegate;
         _setupScreenDelegate = delegate;
         _enteredPin = nil;
+        _enterPinTitle = @"Please Enter your pin";
+        _confirmPinTitle = @"Please confirm your pin";
+        _pinDoesNotMatchTitle = @"Not a match. Please try again";
     }
     return self;
 }
@@ -66,7 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [lockScreenView updateDetailLabelWithString:@"Please Enter your pin" animated:NO completion:nil];
+    [lockScreenView updateDetailLabelWithString:self.enterPinTitle animated:NO completion:nil];
 }
 
 #pragma mark -
@@ -87,7 +90,7 @@
 {
     self.enteredPin = self.currentPin;
     self.currentPin = @"";
-    [lockScreenView updateDetailLabelWithString:@"Please confirm your pin" animated:YES completion:nil];
+    [lockScreenView updateDetailLabelWithString:self.confirmPinTitle animated:YES completion:nil];
     [lockScreenView resetAnimated:YES];
 }
          
@@ -102,7 +105,7 @@
     }
     else
     {
-        [lockScreenView updateDetailLabelWithString:@"Not a match. Please try again" animated:YES completion:nil];
+        [lockScreenView updateDetailLabelWithString:self.pinDoesNotMatchTitle animated:YES completion:nil];
         [lockScreenView resetAnimated:YES];
         self.enteredPin = nil;
         self.currentPin = @"";
